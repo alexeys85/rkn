@@ -14,9 +14,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  curl:
+  upd_rkn:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
     - name: curl
       uses: wei/curl@master
       with:
