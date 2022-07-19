@@ -29,4 +29,7 @@ jobs:
     - name: Commit results
       uses: EndBug/add-and-commit@v9
       with:
+        author_name: Alexey Smirnov
+        author_email: s.alexey@gmail.com
+        message: 'Update IP lists'
         add: '*.lst --force'
