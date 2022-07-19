@@ -20,7 +20,7 @@ jobs:
     - name: curl
       uses: wei/curl@master
       with:
-        args: -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv
+        args: -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv -o dump.csv
     - name: Process
       run: cat dump.csv | cut -d";" -f1 | tr '|' '\n' | tail -n +2 | sort -u > dump.txt
     - name: Sort Ipv4
