@@ -26,4 +26,8 @@ jobs:
     - name: Sort Ipv4
       run: grep '\.' dump.txt > ip.lst
     - name: Sort Ipv6
-      run: grep ':' dump.txt > ip.lst
+      run: grep ':' dump.txt > ip6.lst
+    - name: Commit results
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: '*.lst --force'
