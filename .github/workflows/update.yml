@@ -23,7 +23,7 @@ jobs:
     - name: Process
       run: cat dump.csv | cut -d";" -f1 | tr '|' '\n' | tail -n +2 | sort -u > dump.txt
     - name: Sort Ipv4
-      run: grep '\.' dump.txt > ip.lst
+      run: grep '\.' dump.txt | sort -V > ip.lst
     - name: Sort Ipv6
       run: grep ':' dump.txt > ip6.lst
     - name: Commit results
