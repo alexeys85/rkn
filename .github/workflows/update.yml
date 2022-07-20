@@ -27,11 +27,7 @@ jobs:
     - name: Sort out Ipv4
       run: grep '\.' dump.txt | sort -V > ip_all.lst
     - name: Reduce Ipv4 list
-      run: iprange --ipset-reduce 0 ip_all.lst > ip_net.lst
-    - name: Create Ipv4 nets
-      run: grep '\/' ip_net.lst > net.lst
-    - name: Create Ipv4 list
-      run: grep -v '\/' ip_net.lst > ip.lst
+      run: iprange --ipset-reduce 0 ip_all.lst | awk '/\// {print $1 > net} !/\// {print $1 > ip}' "net=net.lst" "ip=ip.lst"
     - name: Sort Ipv6
       run: grep ':' dump.txt > ip6.lst
     - name: Commit results
