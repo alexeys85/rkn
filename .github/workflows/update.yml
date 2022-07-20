@@ -16,14 +16,22 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
+    - name: Installing iprange
+      run: sudo apt-get install -y iprange
     - name: curl
       uses: wei/curl@master
       with:
         args: -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv -o dump.csv
-    - name: Process
+    - name: Process RKN dump
       run: cat dump.csv | cut -d";" -f1 | tr '|' '\n' | tail -n +2 | sort -u > dump.txt
-    - name: Sort Ipv4
-      run: grep '\.' dump.txt | sort -V > ip.lst
+    - name: Sort out Ipv4
+      run: grep '\.' dump.txt | sort -V > ip_all.lst
+    - name: Reduce Ipv4 list
+      run: iprange --ipset-reduce 0 ip_all.lst > ip_net.lst
+    - name: Create Ipv4 nets
+      run: grep '\/' ip_net.lst > net.lst
+    - name: Create Ipv4 list
+      run: grep -v '\/' ip_net.lst > ip.lst
     - name: Sort Ipv6
       run: grep ':' dump.txt > ip6.lst
     - name: Commit results
