@@ -16,12 +16,10 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
-    - name: Installing iprange
-      run: sudo apt-get install -y iprange
-    - name: curl
-      uses: wei/curl@master
-      with:
-        args: -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv -o dump.csv
+    - name: Installing dependencies
+      run: sudo apt-get install -y iprange curl
+    - name: Downloading RKN dump
+      run: curl -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv -o dump.csv
     - name: Process RKN dump
       run: cut -d";" -f1 dump.csv | tr '|' '\n' | tail -n +2 | sort -u > dump.txt
     - name: Sort out Ipv4
