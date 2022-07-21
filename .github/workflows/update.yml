@@ -17,7 +17,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
     - name: Installing dependencies
-      run: sudo apt-get install -y iprange curl
+      run: sudo apt-get install -y iprange
     - name: Downloading RKN dump
       run: curl -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv -o dump.csv
     - name: Process RKN dump
