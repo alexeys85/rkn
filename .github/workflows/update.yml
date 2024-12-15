@@ -19,7 +19,7 @@ jobs:
     - name: Installing dependencies
       run: sudo apt-get install -y iprange
     - name: Downloading RKN dump
-      run: curl -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv -o dump.csv
+      run: curl -s -L https://raw.githubusercontent.com/zapret-info/z-i/master/dump.csv.gz -o - | gunzip > dump.csv
     - name: Process RKN dump
       run: cut -d";" -f1 dump.csv | tr '|' '\n' | tail -n +2 | sort -u > dump.txt
     - name: Sort out Ipv4
